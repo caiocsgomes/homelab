@@ -1,0 +1,5 @@
+# Force population of arp table
+nmap -sP 192.168.0.0/24
+
+# Force use of password in ssh
+ssh caio@192.168.0.100 -o PubkeyAuthentication=no
