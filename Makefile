@@ -3,16 +3,23 @@
 RUNNER=ansible/runner/ansible-runner.sh
 
 .PHONY: prepare-ansible
-prepare-ansible: start-ansible-runner ansible-credentials
+prepare-ansible: start-ansible-runner create-ansible-credentials
 
 .PHONY: start-ansible-runner
 start-ansible-runner: 
 	make -C ansible/runner start-ansible-runner
 
-.PHONY: ansible-credentials
-ansible-credentials:
+.PHONY: create-ansible-credentials
+create-ansible-credentials:
 	${RUNNER} ansible-playbook create_vault_credentials.yaml
 
 .PHONY: view-vault-credentials
 view-vault-credentials:
 	${RUNNER} ansible-vault view vars/vault.yaml
+
+.PHONY: init
+init: os-upgrade
+
+.PHONY: os-upgrade
+os-upgrade:
+	${RUNNER} ansible-playbook update.yml
