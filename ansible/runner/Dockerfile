@@ -2,6 +2,8 @@ FROM python:slim
 
 RUN python3 -m pip install ansible ansible-core
 
+LABEL runner="ansible-runner"
+
 ENV USER runner
 ENV FOLDER /home/runner
 RUN /usr/sbin/groupadd $USER && \
@@ -9,9 +11,9 @@ RUN /usr/sbin/groupadd $USER && \
     echo $USER 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN for dir in \
-      /runner ; \
-    do mkdir -p $dir ; chown $USER:$USER $dir; chmod 775 $dir ; done
+      /ansible ; \
+    do mkdir -p $dir ; chown -R $USER:$USER $dir; chmod -R 775 $dir ; done
 
 USER $USER
 
-WORKDIR /runner
+WORKDIR /ansible

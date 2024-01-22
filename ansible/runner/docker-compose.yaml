@@ -10,5 +10,5 @@ services:
     container_name: ansible-runner
     restart: unless-stopped
     volumes:
-      - ./../ansible:/runner
-      - ./runner/.vault:/home/runner/.vault
+      - ./../../ansible:/ansible
+      - ./.vault:/home/runner/.vault

@@ -3,3 +3,6 @@ nmap -sP 192.168.0.0/24
 
 # Force use of password in ssh
 ssh caio@192.168.0.100 -o PubkeyAuthentication=no
+
+# Remove all images for ansible-runner
+image=ansible-runner;id=$(docker ps --filter "label=runner=ansible-runner" --format json | jq -r '.ID');docker stop $id; docker rm $id; docker image rm $image;
