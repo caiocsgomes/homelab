@@ -1,7 +1,12 @@
 FROM python:slim
 
-RUN python3 -m pip install ansible ansible-core
+RUN apt-get update -qq && \
+    apt-get install less && \
+    apt-get clean && \
+    rm -rf /usr/share/doc/* /usr/share/man/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN python3 -m pip install ansible ansible-core
+    
 LABEL runner="ansible-runner"
 
 ENV USER runner

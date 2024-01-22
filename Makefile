@@ -12,3 +12,7 @@ start-ansible-runner:
 .PHONY: ansible-credentials
 ansible-credentials:
 	${RUNNER} ansible-playbook create_vault_credentials.yaml
+
+.PHONY: view-vault-credentials
+view-vault-credentials:
+	${RUNNER} ansible-vault view vars/vault.yaml
