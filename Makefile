@@ -22,4 +22,4 @@ init: os-upgrade
 
 .PHONY: os-upgrade
 os-upgrade:
-	${RUNNER} ansible-playbook update.yml
+	${RUNNER} ansible-playbook update.yaml
