@@ -12,3 +12,4 @@ services:
     volumes:
       - ./../../ansible:/ansible
       - ./.vault:/home/runner/.vault
+      - ./.ssh:/home/runner/.ssh

@@ -4,7 +4,7 @@
   gather_facts: false
 
   tasks:
-    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+    - name: Update apt repo and cache on all Debian boxes
       apt:
         update_cache: true
         # Run the equivalent of apt-get update command on all servers

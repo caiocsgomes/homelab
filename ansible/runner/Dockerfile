@@ -2,6 +2,7 @@ FROM python:slim
 
 RUN apt-get update -qq && \
     apt-get install less && \
+    apt-get install openssh-client -y && \
     apt-get clean && \
     rm -rf /usr/share/doc/* /usr/share/man/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

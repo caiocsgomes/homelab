@@ -4,7 +4,9 @@ all:
     raspberrypis:
       hosts:
         node1:
+          ansible_user: pi
           ansible_host: 192.168.0.100
         node2:
+          ansible_user: pi
           ansible_host: 192.168.0.101
 
