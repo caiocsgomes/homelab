@@ -18,8 +18,12 @@ view-vault-credentials:
 	${RUNNER} ansible-vault view vars/vault.yaml
 
 .PHONY: init
-init: os-upgrade
+init: os-upgrade k3s-install
 
 .PHONY: os-upgrade
 os-upgrade:
 	${RUNNER} ansible-playbook update.yaml
+
+.PHONY: k3s-install
+k3s-install:
+	${RUNNER} ansible-playbook k3s_install.yml
