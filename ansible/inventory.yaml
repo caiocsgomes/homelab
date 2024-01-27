@@ -9,4 +9,11 @@ all:
         node1:
           ansible_user: pi
           ansible_host: 192.168.0.101
-
+    k3s_cluster:
+      children:
+        server:
+          hosts:
+            master:
+        agent:
+          hosts:
+            node1:
