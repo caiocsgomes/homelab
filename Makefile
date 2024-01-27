@@ -24,6 +24,10 @@ init: os-upgrade k3s-install
 os-upgrade:
 	${RUNNER} ansible-playbook update.yaml
 
+.PHONY: k3s-uninstall
+k3s-uninstall:
+	${RUNNER} ansible-playbook k3s_uninstall.yaml
+
 .PHONY: k3s-install
 k3s-install:
-	${RUNNER} ansible-playbook k3s_install.yml
+	${RUNNER} ansible-playbook k3s_install.yaml
