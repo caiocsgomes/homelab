@@ -1,5 +1,5 @@
 ---
-- hosts: master
+- hosts: server
   tags: [uninstall]
   become: true
   tasks:

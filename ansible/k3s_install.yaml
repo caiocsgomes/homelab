@@ -3,44 +3,36 @@
 - name: Install K3S prerequisites
   hosts: k3s_cluster
   gather_facts: true
-  tags: [install]
   become: true
   pre_tasks:
     - name: Include vault variables
       include_vars: "vars/vault.yaml"
-      tags: ["always"]
     - name: Include picluster variables
       include_vars: "vars/picluster.yaml"
-      tags: ["always"]
   roles:
     - role: k3s/roles/prereq
+    - role: k3s/roles/airgap
     - role: k3s/roles/raspberrypi
 
 - name: Install K3S master node
   hosts: server
-  tags: [install]
   become: true
   pre_tasks:
     - name: Include vault variables
       include_vars: "vars/vault.yaml"
-      tags: ["always"]
     - name: Include picluster variables
       include_vars: "vars/picluster.yaml"
-      tags: ["always"]
   roles:
     - role: k3s/roles/k3s_server
 
 - name: Install K3S worker nodes
   hosts: agent
-  tags: [install]
   become: true
   pre_tasks:
     - name: Include vault variables
       include_vars: "vars/vault.yaml"
-      tags: ["always"]
     - name: Include picluster variables
       include_vars: "vars/picluster.yaml"
-      tags: ["always"]
   roles:
     - role: k3s/roles/k3s_agent
 
