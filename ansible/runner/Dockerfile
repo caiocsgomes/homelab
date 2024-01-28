@@ -3,6 +3,7 @@ FROM python:slim
 RUN apt-get update -qq && \
     apt-get install less && \
     apt-get install openssh-client -y && \
+    apt-get install git -y && \
     apt-get clean && \
     rm -rf /usr/share/doc/* /usr/share/man/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -17,6 +18,7 @@ RUN /usr/sbin/groupadd $USER && \
     echo $USER 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN for dir in \
+      /usr/share/ansible/roles \
       /ansible ; \
     do mkdir -p $dir ; chown -R $USER:$USER $dir; chmod -R 775 $dir ; done
 

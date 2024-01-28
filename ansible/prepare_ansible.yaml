@@ -18,3 +18,11 @@
     - name: Encrypt file
       ansible.builtin.command:
         cmd: ansible-vault encrypt vars/vault.yaml
+
+- name: Get Roles
+  hosts: localhost
+  tasks:
+    - name: Get K3S Ansible roles
+      ansible.builtin.git:
+        repo: https://github.com/k3s-io/k3s-ansible.git
+        dest: /usr/share/ansible/roles/k3s
