@@ -30,4 +30,4 @@ k3s-uninstall:
 
 .PHONY: k3s-install
 k3s-install:
-	${RUNNER} ansible-playbook k3s_install.yaml
+	${RUNNER} ansible-playbook -v k3s_install.yaml

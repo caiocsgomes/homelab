@@ -9,11 +9,11 @@
   loop:
     - /etc/rancher/k3s
 
-- name: Generate k3s token file on all nodes
-  ansible.builtin.copy:
-    content: "{{ k3s_token }}"
-    dest: "{{ k3s_token_file }}"
-    mode: 0600
+# - name: Generate k3s token file on all nodes
+#   ansible.builtin.copy:
+#     content: "{{ k3s_token }}"
+#     dest: "{{ k3s_token_file }}"
+#     mode: 0600
 
 - name: Copy kubelet configuration file
   copy:
