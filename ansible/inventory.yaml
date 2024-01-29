@@ -17,7 +17,3 @@ all:
         agent:
             hosts:
               node2:
-      vars:
-        api_endpoint: "{{ hostvars[groups['server'][0]]['ansible_host'] | default(groups['server'][0]) }}"
-        extra_server_args: ""
-        extra_agent_args: ""
