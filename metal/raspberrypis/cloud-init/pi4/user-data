@@ -1,26 +1,27 @@
 #cloud-config
-
-# Set TimeZone and Locale
-timezone: UTC
-locale: en_US.UTF-8
-
-# Hostname
 hostname: pi4
-
-# cloud-init not managing hosts file. only hostname is added
-manage_etc_hosts: localhost
+manage_etc_hosts: true
+packages:
+- avahi-daemon
+apt:
+  conf: |
+    Acquire {
+      Check-Date "false";
+    };
 
 users:
-  # not using default ubuntu user
-  - name: pi
-    primary_group: users
-    groups: [adm, admin]
-    shell: /bin/bash
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    lock_passwd: true
-    ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsh7YndMzKxx249lONvqb2eY65gGr/p0C0svJIn5AHO+xC8E2V5wvcUCUHHXkvj7+nqN0E8eyZHmhg5u0mt1wSqefSZ+vxZeTwNpCHIwM2fcyAwLJ6nvcUXKnAnH8UTLbK6/O5qM3y5K4d+C0UkflwHYeKVMKdvzPzxw5SyWi0eEk1uPGRyAIHG8pSonEk2t6tKfZErud0BmvnmASA+7RY+YMdWNvp/UoCL7jXvCJ2+S/6ULeq9fcvUarize9hTAaA3jX7OeT4iUkmHZ+xNM/LY7HFw8ohyc0kOdXUD2sRZo38/tmnEhezi47GR/CMtdSGuOT91YLf9Xz/eMXxnXXmmMDjYHpirUFLYqKBuk6B7hpDrfNbdozUAOJkJWdLH57SHWV+F/vU/ptaYHKbUISBI5M5/az+Lh4aVc3+5BhMA0ZyUWBZ+6dE63MoR92LKTBTDX4Z9mE7szi9KqcUv3Kgl0QfNl9HoYQ+izKmbLSrsUwK1UN3xb/oMcD28pzW06E= caio.gomes@WNL9VG4674
+- name: pi
+  groups: users,adm,dialout,audio,netdev,video,plugdev,cdrom,games,input,gpio,spi,i2c,render,sudo
+  shell: /bin/bash
+  lock_passwd: false
+  passwd: $5$2YqsS/yjBl$cIOdaljYEoajrXw6lCZeq/Qn55PLfBajH/l3GqqVl65
+  ssh_authorized_keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsh7YndMzKxx249lONvqb2eY65gGr/p0C0svJIn5AHO+xC8E2V5wvcUCUHHXkvj7+nqN0E8eyZHmhg5u0mt1wSqefSZ+vxZeTwNpCHIwM2fcyAwLJ6nvcUXKnAnH8UTLbK6/O5qM3y5K4d+C0UkflwHYeKVMKdvzPzxw5SyWi0eEk1uPGRyAIHG8pSonEk2t6tKfZErud0BmvnmASA+7RY+YMdWNvp/UoCL7jXvCJ2+S/6ULeq9fcvUarize9hTAaA3jX7OeT4iUkmHZ+xNM/LY7HFw8ohyc0kOdXUD2sRZo38/tmnEhezi47GR/CMtdSGuOT91YLf9Xz/eMXxnXXmmMDjYHpirUFLYqKBuk6B7hpDrfNbdozUAOJkJWdLH57SHWV+F/vU/ptaYHKbUISBI5M5/az+Lh4aVc3+5BhMA0ZyUWBZ+6dE63MoR92LKTBTDX4Z9mE7szi9KqcUv3Kgl0QfNl9HoYQ+izKmbLSrsUwK1UN3xb/oMcD28pzW06E= caio.gomes@WNL9VG4674
+  sudo: ALL=(ALL) NOPASSWD:ALL
 
-## Reboot to enable Wifi configuration (more details in network-config file)
-power_state:
-  mode: reboot
+
+timezone: Europe/Tallinn
+runcmd:
+- localectl set-x11-keymap "us" pc105
+- setupcon -k --force || true
+
