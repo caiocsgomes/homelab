@@ -5,7 +5,7 @@ timezone: UTC
 locale: en_US.UTF-8
 
 # Hostname
-hostname: pi4
+hostname: pi5
 
 # cloud-init not managing hosts file. only hostname is added
 manage_etc_hosts: localhost
