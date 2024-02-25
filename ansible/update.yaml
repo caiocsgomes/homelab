@@ -4,7 +4,7 @@
   gather_facts: false
 
   tasks:
-    - name: Update apt repo and cache on all Debian boxes
+    - name: Update apt repo and cache on all pis
       apt:
         update_cache: true
         # Run the equivalent of apt-get update command on all servers
@@ -26,7 +26,6 @@
       stat:
         path: /var/run/reboot-required
         get_checksum: false
-        # Algorithm to determine checksum of file
       register: reboot_required_file
       # Save a result in and we are going to use it as follows to reboot the box
 
