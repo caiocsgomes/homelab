@@ -1,0 +1,15 @@
+---
+- hosts: raspberrypis
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Enabling cgroups for raspberry nodes
+      # This is necessary for the container runtime, to be able to control resources inside the different types of namespaces it creates, by controlling the resources for the processes inside each namespace.
+      # This will append the line only if it's not there yet 
+      ansible.builtin.lineinfile:
+        path: /boot/firmware/cmdline.txt
+        backrefs: yes
+        regexp: '^(?!.*cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1$).*'
+        line: '\g<0> cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1'
+
