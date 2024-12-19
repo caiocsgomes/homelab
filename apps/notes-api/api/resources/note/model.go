@@ -14,25 +14,27 @@ type Note struct {
 }
 
 type NoteDTO struct {
-	ID    string `json:"id"`
-	Text  string `json:"text"`
-	Title string `json:"title"`
+	ID        string `json:"id"`
+	Text      string `json:"text"`
+	Title     string `json:"title"`
+	CreatedAt string `json:"created_at"`
 }
 
 func (n *Note) ToDto() *NoteDTO {
-  return &NoteDTO {
-    ID: n.ID.String(),
-    Text: n.Text,
-    Title: n.Title,
-  }
+	return &NoteDTO{
+		ID:        n.ID.String(),
+		Text:      n.Text,
+		Title:     n.Title,
+		CreatedAt: n.CreatedAt.Format(time.RFC822),
+	}
 }
 
 type Notes []*Note
 
 func (ns Notes) ToDto() []*NoteDTO {
-  dtos := make([]*NoteDTO, len(ns))
-  for i, n := range ns {
-    dtos[i] = n.ToDto()
-  }
-  return dtos
+	dtos := make([]*NoteDTO, len(ns))
+	for i, n := range ns {
+		dtos[i] = n.ToDto()
+	}
+	return dtos
 }
